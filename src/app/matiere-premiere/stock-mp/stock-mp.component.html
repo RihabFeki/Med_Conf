@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="m-b-30">
+              <button id="addMP" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#add-mp-modal">Ajouter une Matiere Premiere <i class="fa fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="editable-responsive">
+          <table class="table table-striped" id="stockMP">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Coût moyen</th>
+              <th>Quantité Disponible</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="gradeX" *ngFor="let m of mp, let i=index">
+              <td>{{m.matiere_premiere_id}}</td>
+              <td>{{m.nom}}</td>
+              <td>{{m.prix_moyen}}</td>
+              <td>{{m.quantite_dispo}} {{m.unite.indice}}</td>
+              <td class="actions">
+                <a href="#" class="on-default edit-row" (click)="selectMP(i)" data-toggle="modal" data-target="#list-op-modal"><i class="fa fa-align-left"></i></a> &nbsp;
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- end: panel body -->
+
+    </div> <!-- end panel -->
+  </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<!--Add MP Modal-->
+<div id="add-mp-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"  aria-hidden="true" (click)="cleanAddMPModal()">X</button>
+        <h4 class="modal-title" id="myModalLabel">Ajouter une Matiere Premiere</h4></div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group col-xs-8">
+            <label class="col-md-12"> <span class="help">Matiere Premiere</span></label>
+            <div class="col-md-12">
+              <input type="text" class="form-control form-control-line" placeholder="Enter le Nom de la Matiere Premiere à ajouter" [value]="mpName" (input)="mpName = $event.target.value">
+            </div>
+          </div>
+          <div class="form-group col-xs-4">
+            <label class="col-md-12"> <span class="help">Unité</span></label>
+            <div class="col-md-12">
+              <select [(ngModel)]="selectedUnit" class="form-control" name="unitSelect">
+                <option *ngFor="let u of units, let i=index" [ngValue]="u">{{u.nom}} ({{u.indice}})</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="text-align: center" >
+            <button *ngIf="mpName===''" disabled class="btn btn-danger" style="margin-top: 0.5%">Confirmer &nbsp; <div class="glyphicon glyphicon-chevron-right"></div></button>
+            <button *ngIf="mpName" class="btn btn-success" style="margin-top: 0.5%" (click)="addMP()">Confirmer &nbsp; <div class="glyphicon glyphicon-chevron-right"></div></button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info waves-effect" data-dismiss="modal" (click)="cleanAddMPModal()">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--List Operations Modal-->
+<div id="list-op-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" *ngIf="selectedMP">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+        <h4 class="modal-title" id="myModalLabel" >Historique des operations sur "{{selectedMP.nom}}"</h4></div>
+      <div class="modal-body">
+        <h1 *ngIf="!selectedMP.operations.length">Pas encore d'operations pour {{selectedMP.nom}}</h1>
+        <div class="editable-responsive" *ngIf="selectedMP.operations.length">
+          <table class="table table-striped" id="stockMP">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Quantité</th>
+              <th>Type</th>
+              <th>Prix</th>
+              <th>Fournisseur</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="gradeX" *ngFor="let o of selectedMP.operations, let i=index">
+              <td>{{o.operation_MP_id}}</td>
+              <td>{{o.date[8]}}{{o.date[9]}}/{{o.date[5]}}{{o.date[6]}}/{{o.date[0]}}{{o.date[1]}}{{o.date[2]}}{{o.date[3]}}</td>
+              <td>{{o.quantite}}</td>
+              <!--type-->
+              <td *ngIf="o.achat">Achat</td>
+              <td *ngIf="!o.achat && o.consommation">Consommation</td>
+              <td *ngIf="!o.achat && !o.consommation">corrupt</td>
+              <!--end type-->
+
+              <!--prix-->
+              <td *ngIf="o.achat">{{o.achat.prix}}</td>
+              <td *ngIf="!o.achat">--</td>
+              <!--end prix-->
+              <!--fournisseur-->
+              <td *ngIf="o.achat">{{o.achat.fournisseur.nom}}</td>
+              <td *ngIf="!o.achat">--</td>
+              <!--end fournisseur-->
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info waves-effect" data-dismiss="modal" (click)="cleanAddMPModal()">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

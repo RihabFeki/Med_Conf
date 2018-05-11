@@ -1,0 +1,152 @@
+<!--main form-->
+<div class="card-box">
+  <h4 class="header-title m-t-0 m-b-30">Enregistrer un Achat de Matière Première</h4>
+  <form class="form-horizontal" role="form">
+    <div class="form-group row">
+      <label class="col-sm-3 control-label">Matière Première</label>
+      <div class="col-sm-6">
+        <select class="form-control" [(ngModel)]="selectedMP" name="mpSelect">
+          <option *ngFor="let m of mp, let i=index" [ngValue]="m">{{m.nom}}</option>
+        </select>
+      </div>
+      <div class="col-sm-3">
+        <button id="addMP" class="btn btn-primary waves-effect waves-light" data-toggle="modal"
+                data-target="#add-mp-modal">
+          <div class="glyphicon glyphicon-plus"></div> &nbsp;Ajouter
+        </button>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 control-label">Quantité</label>
+      <div class="col-sm-4">
+        <input type="number" class="form-control" placeholder="0" [(ngModel)]="quantite" name="quantite">
+      </div>
+      <div class="col-sm-2">
+        <select class="form-control" [(ngModel)]="selectedUnit" name="unitSelect">
+          <option *ngFor="let u of units, let i=index" [ngValue]="u">{{u.nom}} ({{u.indice}})</option>
+        </select>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 control-label">Prix</label>
+      <div class="col-sm-6">
+        <div class="input-group">
+          <input type="number" class="form-control" placeholder="0.000" name="prix" [(ngModel)]="prix">
+          <span class="input-group-addon">DT</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 control-label">Date</label>
+      <div class="col-sm-6">
+        <input type="date" class="form-control" name="date" [(ngModel)]="date">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 control-label">Fournisseur</label>
+      <div class="col-sm-6">
+        <select class="form-control" [(ngModel)]="selectedFournisseur" name="fournisseurSelect">
+          <option *ngFor="let f of fournisseurs, let i=index" [ngValue]="f">{{f.nom}}</option>
+        </select>
+      </div>
+      <div class="col-sm-3">
+        <button id="addFournisseur" class="btn btn-primary waves-effect waves-light" data-toggle="modal"
+                data-target="#add-fournisseur-modal">
+          <div class="glyphicon glyphicon-plus"></div> &nbsp;Ajouter
+        </button>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-7"></div>
+      <div class="col-sm-2">
+        <button class="btn btn-success btn-primary waves-effect waves-light" style="margin-left: 25%" (click)="add()">
+          <div class="glyphicon glyphicon-ok"></div> &nbsp;Enregistrer
+        </button>
+      </div>
+      <a class="btn btn-danger btn-primary waves-effect waves-light" href="#/mp/achat" style="margin-left: 1%">
+        <div class="glyphicon glyphicon-remove"></div> &nbsp;Annuler</a>
+    </div>
+  </form>
+</div>
+
+<!--adding mp form-->
+<div id="add-mp-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true" (click)="cleanAddMPModal()">X
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Ajouter une Matiere Premiere</h4></div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group col-xs-8">
+            <label class="col-md-12"> <span class="help">Matiere Premiere</span></label>
+            <div class="col-md-12">
+              <input type="text" class="form-control form-control-line"
+                     placeholder="Enter le Nom de la Matiere Premiere à ajouter" [value]="mpName"
+                     (input)="mpName = $event.target.value">
+            </div>
+          </div>
+          <div class="form-group col-xs-4">
+            <label class="col-md-12"> <span class="help">Unité</span></label>
+            <div class="col-md-12">
+              <select [(ngModel)]="selectedUnitMP" class="form-control" name="unitSelect">
+                <option *ngFor="let u of units, let i=index" [ngValue]="u">{{u.nom}} ({{u.indice}})</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="text-align: center">
+            <button *ngIf="mpName===''" disabled class="btn btn-danger" style="margin-top: 0.5%">Confirmer &nbsp;
+              <div class="glyphicon glyphicon-chevron-right"></div>
+            </button>
+            <button *ngIf="mpName" class="btn btn-success" style="margin-top: 0.5%"
+                    (click)="addMP()">Confirmer &nbsp;
+              <div class="glyphicon glyphicon-chevron-right"></div>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info waves-effect" (click)="cleanAddMPModal()">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--adding fournisseur form-->
+<div id="add-fournisseur-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"  aria-hidden="true"
+                (click)="cleanAddFournisseurModal()">X
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Ajouter un Fournisseur</h4></div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <label class="col-md-12"> <span class="help">Fournisseur</span></label>
+          <div class="col-md-12">
+            <input type="text" class="form-control form-control-line" placeholder="Enter le Nom du fourisseur à ajouter"
+                   [value]="fournisseurName" (input)="fournisseurName = $event.target.value">
+          </div>
+          <div class="form-group" style="text-align: center">
+            <button *ngIf="fournisseurName===''" disabled class="btn btn-danger" style="margin-top: 0.5%">Confirmer &nbsp;
+              <div class="glyphicon glyphicon-chevron-right"></div>
+            </button>
+            <button *ngIf="fournisseurName" class="btn btn-success" style="margin-top: 0.5%"
+                    (click)="addFournisseur()">Confirmer &nbsp;
+              <div class="glyphicon glyphicon-chevron-right"></div>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info waves-effect" (click)="cleanAddFournisseurModal()">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

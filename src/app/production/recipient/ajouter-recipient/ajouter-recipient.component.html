@@ -1,0 +1,79 @@
+
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="card-box" >
+<form class="form-horizontal" [ngBusy]="busy" >
+
+<!--TODO add busy-->
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ajouter un récipient</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Label</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="recipient.label" id="textinput" name="textinput" type="text" placeholder="Label du récipient" class="form-control input-md" required="">
+
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="reference">Référence</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="recipient.reference" id="reference" name="reference" type="text" placeholder="Référence du récipient" class="form-control input-md" required="">
+
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="volume">Volume du récipient</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="recipient.volume" id="volume" name="volume" type="text" placeholder="Volume du récipient" class="form-control input-md" required="">
+
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="unite">Unité</label>
+  <div class="col-md-4">
+    <select [(ngModel)]="recipient.unite_id" id="unite" name="unite" class="form-control">
+     <option *ngFor="let u of unites" [value]="u.unite_id">{{u.nom}}</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cout">Coût d'achat</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="recipient.cout" id="cout" name="cout" type="text" placeholder="Coût d'achat" class="form-control input-md" required="">
+
+  </div>
+</div>
+
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="buttonSubmit">Valider</label>
+  <div class="col-md-8">
+    <button *ngIf="isEditAction == false" (click)="addRecipient()" id="buttonSubmit" name="buttonSubmit" class="btn btn-success">Ajouter</button>
+    <button *ngIf="isEditAction == true" (click)="editRecipient()" id="buttonSubmit" name="buttonSubmit" class="btn btn-success">Modifier</button>
+    <button *ngIf="isEditAction == true" (click)="supprimerRecipient()" id="buttonSubmit" name="buttonSubmit" class="btn btn-danger">Supprimer</button>
+    <button [routerLink]="['/production/recipient/list']" id="buttonAnnuler" name="buttonAnnuler" class="btn btn-warning">Annuler</button>
+  </div>
+</div>
+</fieldset>
+</form>
+
+
+
+</div>
+</div>
+</div>
+</div>

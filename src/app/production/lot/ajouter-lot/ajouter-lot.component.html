@@ -1,0 +1,71 @@
+
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="card-box" >
+<form class="form-horizontal" [ngBusy]="busy" >
+
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ajouter un lot</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Référence</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="lot.reference" id="textinput" name="textinput" type="text"
+  placeholder="Référence du lot" class="form-control input-md" required="">
+
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="produit">Produit</label>
+  <div class="col-md-4">
+    <select [(ngModel)]="selectedIndex" id="produit" name="produit" class="form-control">
+     <option *ngFor="let p of produits; let i=index" [value]="i">{{p.label}}
+     - Ref : {{p.reference}}</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div *ngIf="selectedIndex != -1" class="form-group">
+  <label class="col-md-4 control-label" for="formule">Formule</label>
+  <div class="col-md-4">
+    <select  [(ngModel)]="lot.formule_id" id="formule" name="formule" class="form-control">
+     <option *ngFor="let f of produits[selectedIndex].formules" [value]="f.formule_id">
+     {{f.label}}</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="quantite">Quantité</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="lot.quantite" id="quantite" name="quantite" type="text"
+  placeholder="Quantité de produits dans le lot" class="form-control input-md" required="">
+
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="buttonSubmit">Valider</label>
+  <div class="col-md-8">
+    <button (click)="addLot()" id="buttonSubmit" name="buttonSubmit" class="btn btn-success">Ajouter</button>
+    <button [routerLink]="['/production/lot/list']" id="buttonAnnuler" name="buttonAnnuler" class="btn btn-warning">Annuler</button>
+  </div>
+</div>
+</fieldset>
+</form>
+
+
+
+</div>
+</div>
+</div>
+</div>

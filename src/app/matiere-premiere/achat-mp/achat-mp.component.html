@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="m-b-30">
+              <a id="addMP" class="btn btn-primary waves-effect waves-light" href="/#/mp/achat/add">Enregistrer un Achat <i class="fa fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="editable-responsive">
+          <table class="table table-striped stockMP">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Matiere Premiere</th>
+              <th>Date</th>
+              <th>Quantité</th>
+              <th>Prix</th>
+              <th>Fournisseur</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="gradeX" *ngFor="let a of achats">
+              <td>{{a.achat_mp_id}}</td>
+              <td>{{a.operation.mp.nom}}</td>
+              <td>{{a.operation.date[8]}}{{a.operation.date[9]}}/{{a.operation.date[5]}}{{a.operation.date[6]}}/{{a.operation.date[0]}}{{a.operation.date[1]}}{{a.operation.date[2]}}{{a.operation.date[3]}}</td>
+              <td>{{a.operation.quantite}} {{a.operation.unite.indice}}</td>
+              <td>{{a.prix}} DT</td>
+              <td>{{a.fournisseur.nom}}</td>
+              <td class="actions">
+                &nbsp; <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a> &nbsp;
+                <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- end: panel body -->
+
+    </div> <!-- end panel -->
+  </div> <!-- end col-->
+</div>
+<!-- end row -->

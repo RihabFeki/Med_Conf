@@ -1,0 +1,59 @@
+
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="card-box" >
+<form class="form-horizontal" [ngBusy]="busy" >
+
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ajouter un emballage</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Label</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="emballage.label" id="textinput" name="textinput" type="text"
+  placeholder="Label du récipient" class="form-control input-md" required="">
+
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="reference">Référence</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="emballage.reference" id="reference" name="reference" type="text" placeholder="Référence du récipient" class="form-control input-md" required="">
+
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cout">Coût d'achat</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="emballage.cout" id="cout" name="cout" type="text" placeholder="Coût d'achat" class="form-control input-md" required="">
+
+  </div>
+</div>
+
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="buttonSubmit">Valider</label>
+  <div class="col-md-8">
+    <button *ngIf="isEditAction == false" (click)="addEmballage()" id="buttonSubmit" name="buttonSubmit" class="btn btn-success">Ajouter</button>
+    <button *ngIf="isEditAction == true" (click)="editEmballage()" id="buttonSubmit" name="buttonSubmit" class="btn btn-success">Modifier</button>
+    <button [routerLink]="['/production/emballage/list']" id="buttonAnnuler" name="buttonAnnuler" class="btn btn-warning">Annuler</button>
+  </div>
+</div>
+</fieldset>
+</form>
+
+
+
+</div>
+</div>
+</div>
+</div>

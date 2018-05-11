@@ -1,0 +1,261 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="card-box">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="m-b-30">
+              <button id="addProduct" class="btn btn-primary waves-effect waves-light"
+                      [routerLink]="['/production/produit/ajouter']">Ajouter Produit<i
+                class="fa fa-plus"></i></button>
+            </div>
+          </div>
+        </div>
+        <table [ngBusy]="busy" class="table table-striped table-bordered  dataTable no-footer" id="datatable"
+               role="grid" aria-describedby="datatable_info">
+          <thead>
+          <tr role="row">
+            <th tabindex="0" class="sorting_asc" aria-controls="datatable" style="width: 170px;"
+                aria-label="Name: activate to sort column descending" aria-sort="ascending" rowspan="1"
+                colspan="1">Label
+            </th>
+            <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 116px;"
+                aria-label="Start date: activate to sort column ascending" rowspan="1" colspan="1">Référence
+            </th>
+            <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 116px;"
+                aria-label="Start date: activate to sort column ascending" rowspan="1" colspan="1">Codeabarre
+            </th>
+            <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 116px;"
+                aria-label="Start date: activate to sort column ascending" rowspan="1" colspan="1">Prix
+            </th>
+            <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 116px;"
+                aria-label="Start date: activate to sort column ascending" rowspan="1" colspan="1">Récipient
+            </th>
+            <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 116px;"
+                aria-label="Start date: activate to sort column ascending" rowspan="1" colspan="1">Emballage
+            </th>
+            <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 116px;"
+                aria-label="Start date: activate to sort column ascending" rowspan="1" colspan="1">Quantité Disponible
+            </th>
+            <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 116px;"
+                aria-label="Start date: activate to sort column ascending" rowspan="1" colspan="1">Quantité Totale
+            </th>
+            <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 116px;"
+                aria-label="Start date: activate to sort column ascending" rowspan="1" colspan="1">Formules
+            </th>
+            <th tabindex="0" class="sorting" aria-controls="datatable" style="width: 116px;"
+                aria-label="Start date: activate to sort column ascending" rowspan="1" colspan="1">Actions
+            </th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let p of produits ; let i = index" role="row">
+            <td>{{p.label}}</td>
+            <td>{{p.reference}}</td>
+            <td>{{p.codeABarre}}</td>
+            <td>{{p.prix}}</td>
+            <td>{{p.recipient.label}}</td>
+            <td>{{p.emballage.label}}</td>
+            <td>{{p.produit_stock.quantite_disponible}}</td>
+            <td>{{p.produit_stock.quantite_physique}}</td>
+            <td>
+              <div data-toggle="modal" data-target="#list-formule-modal"
+                   (click)="openListeFormules(i)">Liste
+              </div>
+              <div data-toggle="modal" data-target="#add-formule-modal"
+                   (click)="openAddFormule(i)">Add
+              </div>
+
+            </td>
+            <td>
+
+              <a [routerLink]="['/production/produit/'+p.produit_id+'/edit']" class="text-inverse p-r-10"
+                 data-toggle="tooltip" title="Edit">
+                <i class="ti-marker-alt"></i></a>
+
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="add-formule-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" [ngBusy]="modalBusy">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="clean()" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Ajouter une formule au produit :
+          Ref : {{selectedProduit.reference}} - {{selectedProduit.label}}</h4></div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Label</label>
+            <div class="col-md-4">
+              <input [(ngModel)]="formule.label" id="textinput" name="textinput" type="text"
+                     placeholder="Label de la formule" class="form-control input-md" required="required">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="m-b-30">
+                <a (click)="addProd()" id="addMP" class="btn btn-primary waves-effect waves-light">Ajouter Matière
+                  Première <i class="fa fa-plus"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="row table-responsive">
+            <table class="table ">
+              <tr *ngFor="let mp of formule.formules_matieres_premieres, let i=index">
+                <form>
+                  <td class="col-sm-4">
+                    <div class="form-group">
+                      <label for="mp_id">Matière Première</label>
+                      <select [(ngModel)]="mp.matiere_premiere_id" name="mp_id" class="form-control">
+                        <option *ngFor="let m of mps" [value]="m.matiere_premiere_id">{{m.nom}}</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td class="col-sm-4">
+                    <div class="form-group">
+                      <label for="mp_un_id">Unité</label>
+                      <select [(ngModel)]="mp.unite_id" name="mp_un_id" class="form-control">
+                        <option *ngFor="let u of unites" [value]="u.unite_id">{{u.nom}}</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td class="col-sm-4">
+                    <div class="form-group">
+                      <label for="mp_qt">Quantité</label>
+                      <input placeholder="Quantité" [(ngModel)]="mp.quantite" name="mp_qt" class="form-control">
+                    </div>
+                  </td>
+                  <td class="col-sm-3">
+                    <div class="form-group">
+                      <label for="del"></label>
+                      <button name="del" class="btn btn-danger" (click)="formule.formules_matieres_premieres.splice(i)">
+                        Supprimer
+                      </button>
+                    </div>
+                  </td>
+                </form>
+              </tr>
+
+            </table>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info waves-effect" data-dismiss="modal" (click)="clean()">Close
+        </button>
+        <button type="button" class="btn btn-success waves-effect" data-dismiss="modal" (click)="addFormule()">Ajouter
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="list-formule-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" [ngBusy]="modalBusy">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="clean()" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Liste des Formules du produit :
+          Ref : {{selectedProduit.reference}} - {{selectedProduit.label}}</h4></div>
+      <div class="modal-body">
+        <form>
+
+          <div class="form-group">
+            <label for="f_label">Formules</label>
+            <select name="f_label" [(ngModel)]="selectedFormuleIndex" class="form-control">
+              <option *ngFor="let f of selectedProduit.formules;let i2=index"
+                      [value]="i2">{{f.label}}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="selectedFormuleIndex != -1" class="row">
+            <div class="col-sm-6">
+              <div class="m-b-30">
+                <a (click)="modif=true" id="addMP" class="btn btn-primary waves-effect waves-light">Modifier Formule</a>
+              </div>
+            </div>
+            <div *ngIf="modif" class="col-sm-6">
+              <div class="m-b-30">
+                <a (click)="addProEdit()" id="addMP" class="btn btn-primary waves-effect waves-light">Ajouter Matière
+                  Première <i class="fa fa-plus"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row table-responsive" *ngIf="selectedFormuleIndex > -1">
+            <div *ngIf="modif" class="form-group">
+              <label class="col-md-12 control-label" for="textinput">Label</label>
+              <div class="col-md-12">
+                <input [(ngModel)]="selectedProduit.formules[selectedFormuleIndex].label" id="textinput"
+                       name="textinput" type="text"
+                       placeholder="Label de la formule" class="form-control input-md" required="required">
+              </div>
+            </div>
+            <table class="table ">
+
+              <tr
+                *ngFor="let mp of selectedProduit.formules[selectedFormuleIndex].formules_matieres_premieres, let i=index">
+                <form>
+                  <td class="col-sm-4">
+
+                    <div class="form-group">
+                      <label for="mp_id2">Matière Première</label>
+                      <select [disabled]="!modif" [(ngModel)]="mp.matiere_premiere_id" name="mp_id2"
+                              class="form-control">
+                        <option *ngFor="let m of mps" [value]="m.matiere_premiere_id">{{m.nom}}</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td class="col-sm-4">
+                    <div class="form-group">
+                      <label for="mp_un_id2">Unité</label>
+                      <select [disabled]="!modif" [(ngModel)]="mp.unite_id" name="mp_un_id2" class="form-control">
+                        <option *ngFor="let u of unites" [value]="u.unite_id">{{u.nom}}</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td class="col-sm-4">
+                    <div class="form-group">
+                      <label for="mp_qt2">Quantité</label>
+                      <input [disabled]="!modif" placeholder="Quantité" [(ngModel)]="mp.quantite" name="mp_qt2"
+                             class="form-control">
+                    </div>
+                  </td>
+                  <td class="col-sm-3">
+                    <div class="form-group">
+                      <label for="del2"></label>
+                      <button [disabled]="!modif" name="del2" class="btn btn-danger"
+                              (click)="selectedformule.matieres_premieres.splice(i)">Supprimer
+                      </button>
+                    </div>
+                  </td>
+                </form>
+              </tr>
+
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success" (click)="modifFormule()">Valider</button>
+            <button type="button" class="btn btn-info waves-effect" data-dismiss="modal" (click)="clean()">Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

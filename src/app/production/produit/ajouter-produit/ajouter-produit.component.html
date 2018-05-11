@@ -1,0 +1,90 @@
+
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<div class="card-box" >
+<form class="form-horizontal" [ngBusy]="busy" >
+
+<fieldset>
+
+<!-- Form Name -->
+<legend>Ajouter un Produit</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Label</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="produit.label" id="textinput" name="textinput" type="text"
+  placeholder="Label du produit" class="form-control input-md" required="required">
+
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="reference">Référence</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="produit.reference" id="reference" name="reference" type="text"
+  placeholder="Référence du produit" class="form-control input-md" required="required">
+
+  </div>
+</div>
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="reference">Code à Barres</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="produit.codeABarre" id="reference" name="reference" type="text" placeholder="Code à Barres" class="form-control input-md" required="required">
+  </div>
+</div>
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="recipient">Récipient</label>
+  <div class="col-md-4">
+    <select [(ngModel)]="produit.recipient_id" id="recipient" name="recipient" class="form-control">
+      <option *ngFor="let r of recipients" [value]="r.recipient_id">Label : {{r?.label}} - Ref :{{r?.reference}}
+       - {{r?.volume}} - {{r?.unite.nom}}</option>
+    </select>
+  </div>
+</div>
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="emballage">Emballage</label>
+  <div class="col-md-4">
+    <select [(ngModel)]="produit.emballage_id" id="emballage" name="emballage" class="form-control">
+      <option *ngFor="let e of emballages" [value]="e.emballage_id">Label : {{e?.label}} - Ref : {{e?.reference}}</option>
+    </select>
+  </div>
+</div>
+
+
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cout">Prix de vente</label>
+  <div class="col-md-4">
+  <input [(ngModel)]="produit.prix" id="cout" name="cout" type="text" placeholder="Prix" class="form-control input-md" required="required">
+  </div>
+</div>
+
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="buttonSubmit">Valider</label>
+  <div class="col-md-8">
+    <button *ngIf="isEditAction == false" (click)="addProduit()" id="buttonSubmit" name="buttonSubmit" class="btn btn-success">Ajouter</button>
+    <button *ngIf="isEditAction == true" (click)="editProduit()" id="buttonSubmit" name="buttonSubmit" class="btn btn-success">Modifier</button>
+    <button [routerLink]="['/production/produit/list']" id="buttonAnnuler" name="buttonAnnuler" class="btn btn-warning">Annuler</button>
+  </div>
+</div>
+</fieldset>
+</form>
+
+
+
+</div>
+</div>
+</div>
+</div>
