@@ -15,25 +15,25 @@ import { getLocaleDateFormat } from '@angular/common';
 export class ListeCongresComponent implements OnInit {
   congres: Congres[]=[];
   busy: Subscription;
-  
-  
+
+
    constructor(private congresService: congresService, private router: Router) {
 
-    
+
   }
-  
+
   ngOnInit() {
 
-
-  } 
+    this.getAllcongres();
+  }
   getAllcongres() {
-    
+
     this.busy = this.congresService.getAll().subscribe(data => {
-      
+
       this.congres = data;
     });
 
-    
+
   }
 
 }
