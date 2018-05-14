@@ -24,6 +24,7 @@ import {LotService} from "./shared/services/lot.service";
 import { GestionUtilisateursModule } from './gestion-utilisateurs/gestion-utilisateurs.module';
 import {SharedModule} from "./shared/shared.module";
 import { GestionCongresModule } from './gestion-congres/gestion-congres.module';
+import { congresService } from './shared/services/congres.service';
 
 
 
@@ -61,7 +62,8 @@ import { GestionCongresModule } from './gestion-congres/gestion-congres.module';
     AchatMPService,
     FournisseurService,
     LotService,
-    AuthService
+    AuthService,
+    congresService
   ],
   bootstrap: [AppComponent]
 })

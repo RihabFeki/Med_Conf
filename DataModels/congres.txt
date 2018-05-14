@@ -1,0 +1,53 @@
+---congres----
+
+titre: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    specialite: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    theme: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    date_debut: {
+        type: Date,
+        default: Date.now
+    },
+    date_fin: {
+        type: Date,
+        default: Date.now
+    },
+    hotel: {
+        nom: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        ville: {
+            type: String,
+            required: true,
+            trim: true
+        }
+    },
+    president:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    comite_scientifique:{
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'User'
+    },
+    comite_organisation:{
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'User'
+    },
+    seances: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Seance'
+    }

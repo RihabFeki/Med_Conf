@@ -1,3 +1,56 @@
-<p>
-  liste-congres works!
-</p>
+
+<div class="row">
+    
+  <div class="col-sm-12">
+    <div class="panel">
+      <div class="panel-body">
+          <div class="editable-responsive">
+              <h4 class="header-title m-t-0 m-b-30">La liste des congrès </h4>
+          <table class="table table-striped" id="listCongres">
+            <thead>
+            <tr>
+              <th>Titre</th>
+              <th>Date début</th>
+              <th>Date fin</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="gradeX" *ngFor="let cong of congres , let i=index" >
+               
+                <td>{{cong.titre}}</td>
+                <td>{{cong.date_debut}}</td>
+                <td>{{cong.date_fin}}</td>
+                
+
+               <!--
+              <td>Journée Nationale de pédiatrie </td>
+              <td>25/05/2018</td>
+              <td>30/05/2018</td> -->
+             
+              <td class="actions">
+                  <button (click)="details()" class="btn btn-primary" >
+                       &nbsp;Détails
+                    </button>
+                    <button (click)="modifier()"  class="btn btn-success" >
+                        &nbsp;Modifier
+                     </button>
+                     <button (click)="supprimer()" class="btn btn-danger " >
+                        &nbsp;Supprimer
+                     </button>
+              </td>
+             
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- end: panel body -->
+
+    </div> <!-- end panel -->
+  </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+
+<!-- [routerLink]="['/production/produit/list']" -->

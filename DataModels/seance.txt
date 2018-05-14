@@ -1,0 +1,12 @@
+---seance---
+
+ticket_selection:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Ticket'
+    },
+    date_debut: {
+        type: Date
+    },
+    date_fin: {
+        type: Date
+    }

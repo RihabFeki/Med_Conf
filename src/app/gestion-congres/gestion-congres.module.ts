@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { GestionCongresRouting } from './gestion-congres.routing';
 import { ListeCongresComponent } from './liste-congres/liste-congres.component';
+import { AjoutCongresComponent } from './ajout-congres/ajout-congres.component';
 
 @NgModule({
   imports: [
@@ -10,6 +11,6 @@ import { ListeCongresComponent } from './liste-congres/liste-congres.component';
     GestionCongresRouting,
     FormsModule
   ],
-  declarations: [ListeCongresComponent]
+  declarations: [ListeCongresComponent, AjoutCongresComponent]
 })
 export class GestionCongresModule { }

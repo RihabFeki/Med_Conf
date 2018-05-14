@@ -1,15 +1,20 @@
+import { ticket } from './ticket';
+import { contribution } from './contribution';
+import { adresse } from './adresse';
 export class utilisateurModel  {
  
-    login : string
-    motDePass : string
+    prenom:string;
     nom:string 
-    prenom:string 
-    specialite:string
-    email:string
     cin:string
-    codePostal:string
-    gouvernorat:string
-    pays:string
-    numeroTelephone:string
-    actif: boolean
+    telephone:number;
+    active: boolean;
+    admin: boolean;
+    email:string;
+    hash_password:string;
+    created:Date;
+    specialite:string;
+    adresse: adresse = new adresse();
+    contributions :contribution=new contribution();
+    requetes:ticket=new ticket();
+
   }

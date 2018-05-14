@@ -1,0 +1,24 @@
+---contribution----
+
+ titre: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    theme: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    contenu: [{
+        cle: {
+            type: String
+        },
+        valeur: {
+            type: String
+        }
+    }],
+    date_publication: {
+        type: Date,
+        default: Date.now
+    }

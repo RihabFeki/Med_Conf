@@ -34,7 +34,12 @@ export class FullLayoutComponent implements OnInit {
         {
           name: 'Liste des congrès',
           url: '/congres/list'
+        },
+        {
+          name: 'Ajouter un congrès',
+          url: '/congres/add'
         }
+
 
       ]
     },

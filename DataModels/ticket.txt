@@ -1,0 +1,28 @@
+
+----ticket----
+
+
+type:{
+        type: String,
+        enum: ['Evaluation', 'Sélection']
+    },
+    contribution: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Contribution'
+    },
+    congres:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Congres'
+    },
+    envoyeur: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    receveur: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },    
+    etat:{
+        type: String,
+        enum: ['En cours', 'Acceptée', 'Refusée']
+    }
