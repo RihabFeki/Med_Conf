@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.router.navigate(['/']);
-          this.stoarageService.write(Config.keyAdminToken, data.token);
+          this.stoarageService.write(Config.keyAdminToken, "JWT " + data.token);
         },
         (error) => {
 
