@@ -6,8 +6,8 @@ export class Congres{
    titre:string;
    specialite:string;
    theme:string;
-   date_debut:Date ;
-   date_fin:Date;
+   date_debut_evenement:Date ;
+   date_debut_soumission:Date;
    president:utilisateurModel;
    comite_scientifique:utilisateurModel[];
    comite_organisation:utilisateurModel[];
