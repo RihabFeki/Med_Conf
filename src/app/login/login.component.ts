@@ -27,12 +27,15 @@ export class LoginComponent implements OnInit {
 
   }
 
+  creerCompte(){
+    this.router.navigate(['/nouveauCompte']);
+  }
   loginUser() {
     this.busy = this.authService.login(this.credentials)
       .subscribe(
         (data: any) => {
           this.router.navigate(['/']);
-          this.stoarageService.write(Config.keyAdminToken, data.token);
+          this.stoarageService.write(Config.keyAdminToken, "JWT " + data.token);
         },
         (error) => {
 

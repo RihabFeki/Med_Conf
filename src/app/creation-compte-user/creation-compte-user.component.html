@@ -1,0 +1,141 @@
+
+  <div class="clearfix"></div>
+  <div class="wrapper-page">
+    <div class="text-center">
+      <a href="index.html" class="logo"><span>Med<span>Conf</span></span></a>
+      <h5 class="text-muted m-t-0 font-600">Responsive Admin Dashboard</h5>
+    </div>
+    <div class="m-t-40 card-box">
+      <div class="text-center">
+          <h4 class="text-uppercase font-bold m-b-0">Nouveau compte </h4>
+      </div>
+      <div class="panel-body">
+          <form class="form-horizontal m-t-20" action="index.html">
+
+  <div class="form-group ">
+    <div class="col-xs-12">
+      <input id="nom" name="nom" class="form-control" required placeholder="Nom" [(ngModel)]="user.nom" #nom="ngModel">
+      <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
+        <div *ngIf="nom.errors.required">
+          Le nom est obligatoire
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group ">
+    <div class="col-xs-12">
+      <input id="prenom" name="prenom" class="form-control" required placeholder="Prénom" [(ngModel)]="user.prenom" #prenom="ngModel">
+      <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="alert alert-danger">
+        <div *ngIf="prenom.errors.required">
+          Le prénom est obligatoire
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-xs-12">
+      <select  class="form-control">
+        <option value="" disabled selected>Spécialité</option>
+        <option>pédiatre</option>
+        <option>neurologue</option>
+        <option>ophtalmologue</option>
+        <option>psychiatre</option>
+        <!--<option *ngFor="let u of units, let i=index" [ngValue]="u">{{u.nom}} ({{u.indice}})</option> -->
+      </select>
+      <p> {{selectedItem}}</p>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-xs-12">
+        <input id="cin" name="cin" class="form-control" required minlength="8"  maxlength="8" pattern="[0-9]*" placeholder="CIN" [(ngModel)]="user.cin" #cin="ngModel">
+        <div *ngIf="cin.invalid && (cin.dirty || cin.touched)" class="alert alert-danger">
+          <div *ngIf="cin.errors.required">
+            Le CIN est obligatoire
+          </div>
+    
+        <div *ngIf="cin.errors.pattern">CIN contient seulement des chiffres</div>
+        <div *ngIf="!cin.errors.pattern && (cin.errors.minlength || cin.errors.maxlength )">CIN est composé de 8 chiffres</div>
+        </div>
+    
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-xs-12">
+        <input class="form-control " id="numeroTelephone"[(ngModel)]="user.telephone" minlength="8"  maxlength="8" pattern="[0-9]*" name="numeroTelephone" #numeroTelephone="ngModel" type="text" placeholder="Numéro de téléphone">
+        <div *ngIf="numeroTelephone.invalid && (numeroTelephone.dirty || numeroTelephone.touched)" class="alert alert-danger">
+            <div *ngIf="numeroTelephone.errors.pattern">Le numéro de téléphone contient seulement des chiffres</div>
+            <div *ngIf="!numeroTelephone.errors.pattern && (numeroTelephone.errors.minlength || numeroTelephone.errors.maxlength )">Le numéro de téléphone est composé de 8 chiffres</div>
+          </div>
+        </div>
+  </div>
+
+ <div class="form-group">
+    <div class="col-xs-12">
+      <input class="form-control " [(ngModel)]="user.adresse.pays"name="pays" #pays="ngModel" type="text" placeholder="Pays">
+    </div>
+
+
+  </div>
+
+ <div class="form-group">
+  <div class="col-xs-12">
+    <input class="form-control " [(ngModel)]="user.adresse.ville" name="ville" #ville="ngModel" type="text" placeholder="Ville">
+  </div>
+</div>
+ 
+
+  <div class="form-group">
+    <div class="col-xs-12">
+      <input  id="email"type="email" name="email"class="form-control" required [(ngModel)]="user.email" name="email" #email="ngModel" placeholder=" Email : nom@exemple.com"pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+          <div *ngIf="email.errors.required">
+            L'adresse email est obligatoire
+          </div>
+      <div *ngIf="email.errors.pattern">L'adresse email est invalide </div>
+   
+    </div>
+  </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-xs-12">
+    
+        <input type="password" class="form-control" [(ngModel)]="user.hash_password" name="mdp1" #mdp1="ngModel" placeholder="Mot de passe">
+      </div>
+  </div>
+  <div class="form-group">
+    <div class="col-xs-12">
+  
+      <input type="password" class="form-control" placeholder="Confirmer votre mot de passe">
+    </div>
+</div>
+ 
+
+  <div class="form-group text-center m-t-40">
+    <div class="col-xs-12">
+      <button class="btn btn-custom btn-bordred btn-block waves-effect waves-light" type="submit" (click)="addUser()">
+        Enregister
+      </button>
+    </div>
+  </div>
+
+</form>
+
+      </div>
+  </div>
+  <!-- end card-box -->
+
+<div class="row">
+<div class="col-sm-12 text-center">
+<p class="text-muted">Avez-vous déjà un compte ?<a (click)="seConnecter()" class="text-primary m-l-5"><b>Se connecter</b></a></p>
+</div>
+</div>
+
+</div>

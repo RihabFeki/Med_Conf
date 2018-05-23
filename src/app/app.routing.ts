@@ -1,3 +1,4 @@
+import { CreationCompteUserComponent } from './creation-compte-user/creation-compte-user.component';
 import { LoginComponent } from './login/login.component';
 import {NgModule, Component} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
@@ -38,7 +39,10 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-
+  {
+    path: 'nouveauCompte',
+    component: CreationCompteUserComponent
+  },
 
 ];
 

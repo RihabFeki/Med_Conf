@@ -1,3 +1,4 @@
+import { userService } from './shared/services/user.service';
 
 import { AuthService } from './shared/services/auth.service';
 
@@ -25,6 +26,7 @@ import { GestionUtilisateursModule } from './gestion-utilisateurs/gestion-utilis
 import {SharedModule} from "./shared/shared.module";
 import { GestionCongresModule } from './gestion-congres/gestion-congres.module';
 import { congresService } from './shared/services/congres.service';
+import { CreationCompteUserComponent } from './creation-compte-user/creation-compte-user.component';
 
 
 
@@ -33,6 +35,7 @@ import { congresService } from './shared/services/congres.service';
     AppComponent,
     FullLayoutComponent,
     LoginComponent,
+    CreationCompteUserComponent,
 
 
   ],
@@ -63,7 +66,8 @@ import { congresService } from './shared/services/congres.service';
     FournisseurService,
     LotService,
     AuthService,
-    congresService
+    congresService,
+    userService
   ],
   bootstrap: [AppComponent]
 })

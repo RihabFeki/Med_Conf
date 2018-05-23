@@ -24,7 +24,7 @@ export class ListeCongresComponent implements OnInit {
   
   ngOnInit() {
 
-
+    this.getAllcongres();
   } 
   getAllcongres() {
     

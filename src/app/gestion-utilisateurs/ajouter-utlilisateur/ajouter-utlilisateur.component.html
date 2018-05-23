@@ -7,7 +7,7 @@
         <input id="nom" name="nom" class="form-control" required placeholder="nom" [(ngModel)]="user.nom" #nom="ngModel">
         <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
           <div *ngIf="nom.errors.required">
-            Le nom est obligatire
+            Le nom est obligatoire
           </div>
 
         </div>
@@ -19,7 +19,7 @@
         <input id="prenom" name="prenom" class="form-control" required placeholder="Prénom" [(ngModel)]="user.prenom" #prenom="ngModel">
         <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="alert alert-danger">
           <div *ngIf="prenom.errors.required">
-            Le prénom est obligatire
+            Le prénom est obligatoire
           </div>
 
         </div>
@@ -38,14 +38,18 @@
 
       </div>
       <div class="col-sm-3">
-          <input id="cin" name="cin" class="form-control" required placeholder="CIN" [(ngModel)]="user.cin" #cin="ngModel">
+          <input id="cin" name="cin" class="form-control" required minlength="8"  maxlength="8" pattern="[0-9]*" placeholder="CIN" [(ngModel)]="user.cin" #cin="ngModel">
           <div *ngIf="cin.invalid && (cin.dirty || cin.touched)" class="alert alert-danger">
             <div *ngIf="cin.errors.required">
-              Le CIN est obligatire
+              Le CIN est obligatoire
             </div>
-      </div>
+      
+          <div *ngIf="cin.errors.pattern">CIN contient seulement des chiffres</div>
+          <div *ngIf="!cin.errors.pattern && (cin.errors.minlength || cin.errors.maxlength )">CIN est composé de 8 chiffres</div>
+          </div>
+      
     </div>
-  </div>
+  
 
     <div class="form-group row">
       <div class="col-sm-6 col-lg-offset-3">

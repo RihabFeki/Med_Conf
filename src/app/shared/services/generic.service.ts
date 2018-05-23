@@ -6,6 +6,9 @@ import {HttpHeaders} from "@angular/common/http";
 export class GenericService {
   headers: HttpHeaders;
 
+
+
+  
   constructor() {
     this.headers = new HttpHeaders();
     this.headers.append("Content-Type", "application/json");

@@ -116,6 +116,9 @@ export class FullLayoutComponent implements OnInit {
       }
     );
   }
+  creerCompte(){
+    this.router.navigate(['/nouveauCompte']);
+  }
 
   logout() {
     this.stoarageService.removeAll();
